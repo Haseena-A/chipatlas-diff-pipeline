@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  chipatlas-diff:
+    build:
+      context: .
+      target: runtime
+    image: chipatlas-diff-pipeline:latest
+    volumes:
+      - ./results:/app/results
+      - chipatlas-cache:/home/analyst/.chipatlas_cache
+    environment:
+      - PYTHONPATH=/app
+    command: ["--help"]
+
+  # Run a specific analysis via docker compose run
+  # docker compose run analysis --config configs/example_diffbind.yaml
+  analysis:
+    build:
+      context: .
+      target: runtime
+    image: chipatlas-diff-pipeline:latest
+    volumes:
+      - ./results:/app/results
+      - ./configs:/app/configs:ro
+      - ./examples:/app/examples:ro
+      - chipatlas-cache:/home/analyst/.chipatlas_cache
+    environment:
+      - PYTHONPATH=/app
+    entrypoint: ["python", "/app/cli.py", "run"]
+    command: ["--help"]
+
+volumes:
+  chipatlas-cache:

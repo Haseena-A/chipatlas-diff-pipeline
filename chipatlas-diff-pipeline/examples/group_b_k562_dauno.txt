@@ -1,0 +1,10 @@
+# Group B experiment IDs – K562 Daunorubicin (TP53 ChIP-seq, GSE131484)
+# One SRX/ERX/DRX/GSM accession per line; lines beginning with # are ignored.
+SRX5865967
+SRX5865968
+SRX5865969
+SRX5865970
+SRX5865971
+SRX5865972
+SRX5865973
+SRX5865974

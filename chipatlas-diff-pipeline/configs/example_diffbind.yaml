@@ -1,0 +1,73 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ChIP-Atlas Diff Analysis – Example YAML configuration
+# TP53 ChIP-seq: K-562 DMSO vs Daunorubicin (GSE131484)
+#
+# Usage:
+#   chipatlas-diff run --config configs/example_diffbind.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Genome assembly (hg38, hg19, mm10, mm9, rn6, dm6, dm3, ce11, ce10, sacCer3)
+genome: hg38
+
+# Analysis type: 'diffbind' (ChIP/ATAC/DNase-seq) or 'dmr' (Bisulfite-seq)
+analysis_type: diffbind
+
+# Short title stored in the ChIP-Atlas job metadata
+title: TP53_K562_DMSO_vs_Daunorubicin
+
+# Human-readable labels for each group (used in plots and reports)
+description_a: K562_DMSO
+description_b: K562_Daunorubicin
+
+# Output directory
+output_dir: results/tp53_k562_dmso_vs_daunorubicin
+
+# ── Experiment accessions (SRX/ERX/DRX/GSM) ──────────────────────────────── #
+# Group A – K562 cells treated with DMSO (vehicle control)
+experiments_a:
+  - SRX5865959   # K562, R175H, DMSO
+  - SRX5865960   # K562, Y220C, DMSO
+  - SRX5865961   # K562, M237I, DMSO
+  - SRX5865962   # K562, R248Q, DMSO
+  - SRX5865963   # K562, R273H, DMSO
+  - SRX5865964   # K562, R282W, DMSO
+  - SRX5865965   # K562, KO,    DMSO
+  - SRX5865966   # K562, WT,    DMSO
+
+# Group B – K562 cells treated with Daunorubicin (chemotherapy)
+experiments_b:
+  - SRX5865967   # K562, R175H, Daunorubicin
+  - SRX5865968   # K562, Y220C, Daunorubicin
+  - SRX5865969   # K562, M237I, Daunorubicin
+  - SRX5865970   # K562, R248Q, Daunorubicin
+  - SRX5865971   # K562, R273H, Daunorubicin
+  - SRX5865972   # K562, R282W, Daunorubicin
+  - SRX5865973   # K562, KO,    Daunorubicin
+  - SRX5865974   # K562, WT,    Daunorubicin
+
+# ── Post-retrieval filters (optional) ─────────────────────────────────────── #
+# Minimum BED score (0–1000; 0 = keep all)
+min_score: 0
+
+# Minimum region size in bp (0 = keep all)
+min_region_size: 0
+
+# Keep only one direction (null = keep both; 'A_enriched' or 'B_enriched')
+direction_filter: null
+
+# ── Job settings ──────────────────────────────────────────────────────────── #
+# Maximum seconds to wait for the job to finish
+job_timeout: 900
+
+# Seconds between status polls
+poll_interval: 15
+
+# ── Experimental design notes (appended to the summary report) ───────────── #
+design_caveats:
+  - >
+    Each group contains 8 different TP53 genotypes (WT, KO, R175H, Y220C,
+    M237I, R248Q, R273H, R282W), not 8 biological replicates of the same
+    genotype. edgeR treats all within-group experiments as replicates, so
+    the differential analysis captures the average DMSO-vs-Daunorubicin
+    effect across genotypes. Genotype-specific effects are averaged out and
+    cannot be distinguished from noise.

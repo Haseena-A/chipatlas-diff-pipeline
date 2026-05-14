@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "chipatlas-diff-pipeline"
+version = "1.0.0"
+description = "Production-grade ChIP-seq differential binding analysis via the ChIP-Atlas API"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "chipatlas-diff-pipeline contributors" }
+]
+keywords = [
+    "bioinformatics", "ChIP-seq", "ATAC-seq", "differential binding",
+    "epigenomics", "ChIP-Atlas", "edgeR", "DiffBind"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31.0",
+    "urllib3>=2.0.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "plotnine>=0.12.0",
+    "plotnine-prism>=0.3.0",
+    "matplotlib>=3.7.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+]
+jupyter = [
+    "jupyterlab>=4.0.0",
+    "ipykernel>=6.0.0",
+]
+
+[project.scripts]
+chipatlas-diff = "cli:main"
+
+[project.urls]
+Homepage      = "https://chip-atlas.org"
+Documentation = "https://github.com/your-org/chipatlas-diff-pipeline#readme"
+Repository    = "https://github.com/your-org/chipatlas-diff-pipeline"
+Issues        = "https://github.com/your-org/chipatlas-diff-pipeline/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v --tb=short"
+
+[tool.ruff]
+line-length    = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true

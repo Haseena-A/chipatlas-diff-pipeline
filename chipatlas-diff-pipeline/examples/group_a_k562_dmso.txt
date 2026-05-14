@@ -1,0 +1,10 @@
+# Group A experiment IDs – K562 DMSO (TP53 ChIP-seq, GSE131484)
+# One SRX/ERX/DRX/GSM accession per line; lines beginning with # are ignored.
+SRX5865959
+SRX5865960
+SRX5865961
+SRX5865962
+SRX5865963
+SRX5865964
+SRX5865965
+SRX5865966

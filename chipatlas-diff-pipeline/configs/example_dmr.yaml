@@ -1,0 +1,30 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ChIP-Atlas Diff Analysis – DMR example configuration
+# Differentially Methylated Regions (Bisulfite-seq), mouse genome
+#
+# Usage:
+#   chipatlas-diff run --config configs/example_dmr.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+genome: mm10
+analysis_type: dmr
+title: example_dmr_mm10
+description_a: Condition_A
+description_b: Condition_B
+output_dir: results/example_dmr_mm10
+
+# Replace the placeholder IDs below with real SRX/GSM accessions from SRA/GEO
+# that have Bisulfite-seq data processed by ChIP-Atlas (mm10).
+experiments_a:
+  - SRXxxxxxx   # Replace with real ID
+  - SRXyyyyyy   # Replace with real ID
+
+experiments_b:
+  - SRXaaaaaa   # Replace with real ID
+  - SRXbbbbbb   # Replace with real ID
+
+min_score: 0
+min_region_size: 0
+direction_filter: null
+job_timeout: 1200
+poll_interval: 20
